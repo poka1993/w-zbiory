@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\WineController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,8 @@ Route::resource('posts', PostController::class)
     ->middleware(['auth']);
 
 Route::get('/post/{postId}', [PostController::class, 'show']);
+
+Route::get('/wine', [WineController::class, 'show']);
 
 Route::resource('admin', AdminPanelController::class)
     ->only(['index', 'store', 'update', 'destroy'])
