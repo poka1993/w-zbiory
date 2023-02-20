@@ -23,6 +23,14 @@
     },
     "dependencies": {
         "dayjs": "^1.11.7",
-        "react-js-pagination": "^3.0.3"
+        "moment": "^2.29.4",
+        "react-bootstrap": "^2.7.0",
+        "react-datetime": "^3.2.0",
+        "react-flags-select": "^2.2.3",
+        "react-image-magnify": "^2.7.4",
+        "react-js-pagination": "^3.0.3",
+        "react-select": "^5.7.0",
+        "react-simple-star-rating": "^5.1.7",
+        "sass": "^1.58.0"
     }
 }

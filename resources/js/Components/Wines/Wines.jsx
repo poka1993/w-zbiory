@@ -1,7 +1,12 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import {flags} from '@/Components/Flags';
+import DishComponent from '@/Components/DishCompontent';
 
 export default function Wines({  }) {
+  function flagIcon(code) {
+    return <div className="ms-1 me-1 d-inline-block text-lg">{flags.filter((d) => d.value == code)[0].icon}</div>
+  }
     return (
         <>
             <div class="row">
@@ -10,7 +15,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                    <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -29,7 +34,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -52,9 +57,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -65,27 +70,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Dziczyzna"/>
+<DishComponent label="Zupy"/>
+<DishComponent label="Sałatki"/>
+<DishComponent label="Owoce morza"/>
               </div>
                 </div>
                 </div>
@@ -103,7 +92,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                      <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -122,7 +111,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -145,9 +134,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -158,27 +147,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Dziczyzna"/>
+<DishComponent label="Zupy"/>
+<DishComponent label="Sałatki"/>
+<DishComponent label="Owoce morza"/>
               </div>
                 </div>
                 </div>
@@ -200,7 +173,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                    <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -219,7 +192,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -242,9 +215,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -255,27 +228,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Dziczyzna"/>
+<DishComponent label="Zupy"/>
+<DishComponent label="Sałatki"/>
+<DishComponent label="Owoce morza"/>
               </div>
                 </div>
                 </div>
@@ -290,7 +247,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                    <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -309,7 +266,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -332,9 +289,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -345,27 +302,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Dziczyzna"/>
+<DishComponent label="Zupy"/>
+<DishComponent label="Sałatki"/>
+<DishComponent label="Sery słone"/>
               </div>
                 </div>
                 </div>
@@ -386,7 +327,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                    <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -405,7 +346,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -428,9 +369,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -441,27 +382,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Wołowina"/>
+<DishComponent label="Sery pleśniowe"/>
+<DishComponent label="Aperitif"/>
+<DishComponent label="Wieprzowina"/>
               </div>
                 </div>
                 </div>
@@ -481,7 +406,7 @@ export default function Wines({  }) {
                 <div class="card-body py-0">
                   <div class="row p-3">
                     <div class="col-4 d-flex align-items-center p-0">
-                      <div className="wine-shape bg-dark text-center text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
+                    <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
                         <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
                       </div>                 
                     </div><div class="col-8 d-flex flex-column p-0 m-0">
@@ -500,7 +425,7 @@ export default function Wines({  }) {
 </h4>
                           <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
                           <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj:<img src="storage/flags/Argentina.png" class="ms-1 me-1" height="14" width="21" alt="wine_image" /><b>Argentyna</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
                           <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
                           <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
@@ -523,9 +448,9 @@ export default function Wines({  }) {
                     </svg>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end me-n4">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><a class="dropdown-item" href="#">Pokaż szczegóły</a></li>
+                              <li><a class="dropdown-item" href="#">Dodaj do ulubionych</a></li>
+                              <li><a class="dropdown-item" href="#">Udostępnij znajomym</a></li>
                             </ul>
                          </div>
                         </div>
@@ -536,27 +461,11 @@ export default function Wines({  }) {
 
                     </div>
                         <p class="text-sm mb-1 mt-3 ps-3">Najlepiej podawać do:</p>
-                        <div class="d-flex row ps-3">
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="ms-2 me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-                <img src="storage/food/cow-black.png" height="36" width="36" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Zupy</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/zupa-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Sałatki</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/salad-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Owoce morza</Tooltip>}>
-              <div class="me-2 icon icon-shape bg-white shadow shadow-xs text-center border border-radius-md d-flex align-items-center justify-content-center mb-3">
-              <img src="storage/food/shrimp-black.png" height="32" width="32" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
+                        <div class="d-flex row ps-4">
+<DishComponent label="Sery twarde"/>
+<DishComponent label="Ryby"/>
+<DishComponent label="Drób"/>
+<DishComponent label="Orzechy"/>
               </div>
                 </div>
                 </div>

@@ -34,6 +34,14 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'required' => 'Te pole jest obowiązkowe',
+            'email' => 'Pole nie spełnia kryteriów prawidłowego adresu email.',
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -49,7 +57,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Nie prawidłowy e-mail lub hasło.',
             ]);
         }
 

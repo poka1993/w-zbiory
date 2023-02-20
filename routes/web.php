@@ -36,7 +36,11 @@ Route::resource('posts', PostController::class)
 
 Route::get('/post/{postId}', [PostController::class, 'show']);
 
+Route::get('/users', [UserController::class, 'show']);
+
 Route::get('/wine', [WineController::class, 'show']);
+
+Route::get('/addwine', [WineController::class, 'add']);
 
 Route::resource('admin', AdminPanelController::class)
     ->only(['index', 'store', 'update', 'destroy'])

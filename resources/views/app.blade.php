@@ -16,6 +16,14 @@
 
         <!-- Scripts -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LczoUgkAAAAAE8lBRG1MRRM40UyhSAltkx00zGh"></script>
+<script>
+grecaptcha.enterprise.ready(function() {
+    grecaptcha.enterprise.execute('6LczoUgkAAAAAE8lBRG1MRRM40UyhSAltkx00zGh', {action: 'login'}).then(function(token) {
+       ...
+    });
+});
+</script> -->
         @routes
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])

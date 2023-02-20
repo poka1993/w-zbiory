@@ -722,7 +722,7 @@
 
 .sidenav[data-color="primary"] .navbar-nav>.nav-item>.nav-link.active .icon .color-background,
 .sidenav[data-color="primary"] .navbar-nav>.nav-item>.nav-link.active .icon .color-foreground {
-  fill: #774dd3;
+  fill: #55a6f8;
 }
 
 .sidenav[data-color="secondary"] .navbar-nav>.nav-item>.nav-link.active .icon .color-background,
@@ -948,7 +948,7 @@
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-foreground {
-  fill: #774dd3;
+  fill: #55a6f8;
 }
 
 .navbar-vertical .navbar-nav>.nav-item.border-start {
@@ -1128,4 +1128,12 @@
   .navbar-vertical .docs-info {
     transition: none;
   }
+}
+
+.offcanvas-search {
+  height: 18vh !important;
+}
+
+.offcanvas-notifications {
+  height: 34vh !important;
 }

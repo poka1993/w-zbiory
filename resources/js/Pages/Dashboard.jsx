@@ -21,7 +21,7 @@ export default function Dashboard(props) {
             
 {/* menu boczne */}
 <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-<Navigation />
+<Navigation props={props.auth.user}/>
 <Statistics />
     {/* <!-- End Navbar --> */}
     <div className="container-fluid py-4 px-3">

@@ -1,9 +1,43 @@
 import { Link, Head } from '@inertiajs/inertia-react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Filter from '@/Components/Filter'
+import Navigation from '@/Components/Navigation'
+import Statistics from '@/Components/Statistics'
+import Wines from '@/Components/Wines/Wines'
+import Footer from '@/Components/Footer'
+
 
 export default function Welcome(props) {
     return (
         <>
-            <Head title="Welcome" />
+        {/* // <AuthenticatedLayout
+        //     auth={props.auth}
+        //     errors={props.errors}
+        //     header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
+        // > */}
+        
+            <Head title="Strona główna" />
+            
+{/* menu boczne */}
+<main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+<Navigation props={props.auth.user}/>
+<Statistics />
+    {/* <!-- End Navbar --> */}
+    <div className="container-fluid py-4 px-3">
+      <Filter />
+      <Wines />      
+      <Footer />  
+    </div>
+  </main>                  
+
+
+
+
+
+
+
+
+            {/* <Head title="Welcome" />
             <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
                 <div className="fixed top-0 right-0 px-6 py-4 sm:block">
                     {props.auth.user ? (
@@ -253,7 +287,7 @@ export default function Welcome(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }

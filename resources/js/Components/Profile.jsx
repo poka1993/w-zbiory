@@ -1,10 +1,39 @@
 import { Link } from '@inertiajs/inertia-react';
 import Wines from '@/Components/Wines/Wines';
+import AddComment from '@/Components/AddComment';
+import Opinions from '@/Components/Opinions';
+import UsersList from '@/Components/UsersList'
+import React, { useState } from 'react';
 
 export default function Profile({}) {
+  const [selectedList, setSelectedList] = useState("opinions");
+  const [renderedList, setRenderedList] = useState(<ul class="list-group"><Opinions /></ul>);
+  const [renderedHeader, setRenderedHeader] = useState("Wystawionych opinii: 42");
+
+  function renderList(id) {
+    switch (id) {
+      case "opinions":
+      setRenderedList(      <div class="col-12"><div class="card border shadow-xs h-100 overflow-hidden border-top-0">
+      <ul class="list-group"><Opinions /></ul></div></div>);
+      setRenderedHeader("Wystawionych opinii: 42");
+      break;
+      case "wines":
+      setRenderedList(<Wines />);
+      setRenderedHeader("Ulubionych win: 35");
+      break;
+      case "friends":
+      setRenderedList(        
+      <div class="col-12"><div class="card border shadow-xs mb-4 overflow-hidden">
+      <UsersList />
+      </div></div>);
+      setRenderedHeader("Liczba znajomych: 18");
+      break;
+    }
+  };
+
     return (
       <>
-          
+     <AddComment />
         <div className='ms-lg-6 me-lg-6 ms-3 me-3 text-align-center border-radius-md'>
       <div className="col-12">
           <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 bg-cover" style={{backgroundImage: `url('storage/img/header-blue2.jpg')`}}> 
@@ -107,7 +136,7 @@ export default function Profile({}) {
                         <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                       </svg>
                     </span>
-                    <span class="btn-inner--text text-nowrap">Dodaj komentarz</span>
+                    <span class="btn-inner--text text-nowrap" data-bs-toggle="modal" data-bs-target="#commentModal" data-toggle="commentModal" data-target="commentModal">Dodaj komentarz</span>
                   </button>
                   </div>
                 </div>
@@ -250,23 +279,25 @@ export default function Profile({}) {
         <div class="col-12">
         <div class="d-lg-flex align-items-center mt-4 mb-4">
           <div class="flex-grow mb-md-0 mb-4">
-            <h5 class="font-weight-semibold mb-1 ms-4">Ulubionych win: 52</h5>
-            <p class="text-sm mb-0 ms-4">Zasubskrybuj użytkownika żeby móc śledzić jego opinie!</p>
+            <h5 class="font-weight-semibold mb-1 ms-4">{renderedHeader}</h5>
+            <p class="text-sm mb-0 ms-4">Jeśli chcesz śledzić poczynania tego użytkownika na stronie, zaproś go do znajomych.</p>
           </div>
           <div class="btn-group d-flex align-items-end mb-0 me-4 mt-2 ms-4 ms-sm-auto" role="group" aria-label="Basic radio toggle button group">
-                  <input type="radio" class="btn-check " name="btnradiotable" id="btnradiotable1" autocomplete="off" />
-                  <label class="btn btn-white px-3 mb-0 " for="btnradiotable1">Wystawione opinie</label>
-                  <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2" autocomplete="off" />
-                  <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Ulubione wina</label>
-                  <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" autocomplete="off" />
-                  <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Lista znajomych</label>
+                  <input type="radio" class="btn-check" name="listOptions" id="opinions" autocomplete="off" onChange={(e) => renderList(e.target.id) + setSelectedList(e.target.id)} checked={selectedList=="opinions"} />
+                  <label class="btn btn-white px-3 mb-0 " for="opinions">Wystawione opinie</label>
+                  <input type="radio" class="btn-check" name="listOptions" id="wines" autocomplete="off" onChange={(e) => renderList(e.target.id) + setSelectedList(e.target.id)} checked={selectedList=="wines"}/>
+                  <label class="btn btn-white px-3 mb-0" for="wines">Ulubione wina</label>
+                  <input type="radio" class="btn-check" name="listOptions" id="friends" autocomplete="off" onChange={(e) => renderList(e.target.id) + setSelectedList(e.target.id)} checked={selectedList=="friends"}/>
+                  <label class="btn btn-white px-3 mb-0" for="friends">Lista znajomych</label>
             </div>
 
         </div>
       </div>
       <hr />
         <div className='mb-n4'>
-        <Wines />
+          {renderedList}
+        {/* <ul class="list-group"><Opinions /></ul>
+        <div><Wines /></div> */}
         </div>
 
       

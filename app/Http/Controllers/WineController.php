@@ -52,6 +52,13 @@ class WineController extends Controller
         return redirect(route('posts.index'));
     }
 
+    public function add(Request $request)
+    {
+        return Inertia::render('Wine/AddWine', [
+
+        ]);
+    }
+
     public function show(Request $request)
     {
         return Inertia::render('Wine/Wine', [

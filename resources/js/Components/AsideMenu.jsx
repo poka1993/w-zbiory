@@ -1,135 +1,136 @@
 import Dropdown from '@/Components/Dropdown';
+import { Link} from '@inertiajs/inertia-react';
+import React, { useState } from "react";
 
 export default function AsideMenu() {
+  const [hoverDashbord, setHoverDashbord] = useState(false);
+  const [hoverRules, setHoverRules] = useState(false);
+  const [hoverAddWine, setHoverAddWine] = useState(false);
+  const [hoverUsers, setHoverUsers] = useState(false);
+  const [hoverContact, setHoverContact] = useState(false);
+
+  const [hoverProfile, setHoverProfile] = useState(false);
+  const [hoverSettings, setHoverSettings] = useState(false);
+  const [hoverLogout, setHoverLogout] = useState(false);
+
     return (
         <aside className="offcanvas offcanvas-start sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div className="sidenav-header">
+        <div className="sidenav-header overflow-hidden">
           <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-          <a className="navbar-brand d-flex align-items-center m-0">
-            <span className="font-weight-bold text-lg">Corporate UI</span>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <a className="navbar-brand d-flex align-items-center">
+            <span className="font-weight-bold text-lg">Winozbiory.pl</span>
+            <button type="button" class="ps-8 btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </a>
         </div>
-        <div className="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
+        <div className="overflow-hidden collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
           <ul className="navbar-nav">
+          <li className="nav-item mt-4">
+              <div className="d-flex align-items-center nav-link ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+                <span className="font-weight-normal text-md ms-2">Menu główne</span>
+              </div>
+            </li>
+
             <li className="nav-item">
-              <a className="nav-link  active" href="../pages/dashboard.html">
+            <a className={`nav-link active ${Boolean(hoverDashbord) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverDashbord(true)}} onMouseLeave={() => {setHoverDashbord(false)}}>
                 <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                  <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                    <title>dashboard</title>
-                    <g id="dashboard" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                      <g id="template" transform="translate(12.000000, 12.000000)" fill="#FFFFFF" fillRule="nonzero">
-                        <path className="color-foreground" d="M0,1.71428571 C0,0.76752 0.76752,0 1.71428571,0 L22.2857143,0 C23.2325143,0 24,0.76752 24,1.71428571 L24,5.14285714 C24,6.08962286 23.2325143,6.85714286 22.2857143,6.85714286 L1.71428571,6.85714286 C0.76752,6.85714286 0,6.08962286 0,5.14285714 L0,1.71428571 Z" id="Path"></path>
-                        <path className="color-background" d="M0,12 C0,11.0532171 0.76752,10.2857143 1.71428571,10.2857143 L12,10.2857143 C12.9468,10.2857143 13.7142857,11.0532171 13.7142857,12 L13.7142857,22.2857143 C13.7142857,23.2325143 12.9468,24 12,24 L1.71428571,24 C0.76752,24 0,23.2325143 0,22.2857143 L0,12 Z" id="Path"></path>
-                        <path className="color-background" d="M18.8571429,10.2857143 C17.9103429,10.2857143 17.1428571,11.0532171 17.1428571,12 L17.1428571,22.2857143 C17.1428571,23.2325143 17.9103429,24 18.8571429,24 L22.2857143,24 C23.2325143,24 24,23.2325143 24,22.2857143 L24,12 C24,11.0532171 23.2325143,10.2857143 22.2857143,10.2857143 L18.8571429,10.2857143 Z" id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+  <path className="color-foreground" d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+</svg>
                 </div>
-                <span className="nav-link-text ms-1">Dashboard</span>
+                <span className="nav-link-text ms-1">Strona Główna</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link  " href="../pages/tables.html">
+              <a className={`nav-link ${Boolean(hoverRules) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverRules(true)}} onMouseLeave={() => {setHoverRules(false)}}>
                 <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                  <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                    <title>table</title>
-                    <g id="table" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                      <g id="view-grid" transform="translate(12.000000, 12.000000)" fill="#FFFFFF" fillRule="nonzero">
-                        <path className="color-foreground" d="M3.42857143,0 C1.53502286,0 0,1.53502286 0,3.42857143 L0,6.85714286 C0,8.75069143 1.53502286,10.2857143 3.42857143,10.2857143 L6.85714286,10.2857143 C8.75069143,10.2857143 10.2857143,8.75069143 10.2857143,6.85714286 L10.2857143,3.42857143 C10.2857143,1.53502286 8.75069143,0 6.85714286,0 L3.42857143,0 Z" id="Path"></path>
-                        <path className="color-background" d="M3.42857143,13.7142857 C1.53502286,13.7142857 0,15.2492571 0,17.1428571 L0,20.5714286 C0,22.4650286 1.53502286,24 3.42857143,24 L6.85714286,24 C8.75069143,24 10.2857143,22.4650286 10.2857143,20.5714286 L10.2857143,17.1428571 C10.2857143,15.2492571 8.75069143,13.7142857 6.85714286,13.7142857 L3.42857143,13.7142857 Z" id="Path"></path>
-                        <path className="color-background" d="M13.7142857,3.42857143 C13.7142857,1.53502286 15.2492571,0 17.1428571,0 L20.5714286,0 C22.4650286,0 24,1.53502286 24,3.42857143 L24,6.85714286 C24,8.75069143 22.4650286,10.2857143 20.5714286,10.2857143 L17.1428571,10.2857143 C15.2492571,10.2857143 13.7142857,8.75069143 13.7142857,6.85714286 L13.7142857,3.42857143 Z" id="Path"></path>
-                        <path className="color-foreground" d="M13.7142857,17.1428571 C13.7142857,15.2492571 15.2492571,13.7142857 17.1428571,13.7142857 L20.5714286,13.7142857 C22.4650286,13.7142857 24,15.2492571 24,17.1428571 L24,20.5714286 C24,22.4650286 22.4650286,24 20.5714286,24 L17.1428571,24 C15.2492571,24 13.7142857,22.4650286 13.7142857,20.5714286 L13.7142857,17.1428571 Z" id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                  <path className="color-foreground" fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                  <path className="color-foreground" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                  <path className="color-foreground" d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
                 </div>
-                <span className="nav-link-text ms-1">Tables</span>
+                <span className="nav-link-text ms-1">Regulamin</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link  " href="../pages/wallet.html">
+            <a className={`nav-link ${Boolean(hoverAddWine) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverAddWine(true)}} onMouseLeave={() => {setHoverAddWine(false)}}>
                 <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                  <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                    <title>wallet</title>
-                    <g id="wallet" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                      <g id="credit-card" transform="translate(12.000000, 15.000000)" fill="#FFFFFF">
-                        <path className="color-background" d="M3,0 C1.343145,0 0,1.343145 0,3 L0,4.5 L24,4.5 L24,3 C24,1.343145 22.6569,0 21,0 L3,0 Z" id="Path" fillRule="nonzero"></path>
-                        <path className="color-foreground" d="M24,7.5 L0,7.5 L0,15 C0,16.6569 1.343145,18 3,18 L21,18 C22.6569,18 24,16.6569 24,15 L24,7.5 Z M3,13.5 C3,12.67155 3.67158,12 4.5,12 L6,12 C6.82842,12 7.5,12.67155 7.5,13.5 C7.5,14.32845 6.82842,15 6,15 L4.5,15 C3.67158,15 3,14.32845 3,13.5 Z M10.5,12 C9.67158,12 9,12.67155 9,13.5 C9,14.32845 9.67158,15 10.5,15 L12,15 C12.82845,15 13.5,14.32845 13.5,13.5 C13.5,12.67155 12.82845,12 12,12 L10.5,12 Z" id="Shape"></path>
-                      </g>
-                    </g>
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                </svg>
                 </div>
-                <span className="nav-link-text ms-1">Wallet</span>
+                <span className="nav-link-text ms-1">Dodaj wino</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link  " href="../pages/rtl.html">
+            <a className={`nav-link ${Boolean(hoverUsers) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverUsers(true)}} onMouseLeave={() => {setHoverUsers(false)}}>
                 <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                  <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                    <title>rtl</title>
-                    <g id="rtl" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                      <g id="menu-alt-3" transform="translate(12.000000, 14.000000)" fill="#FFFFFF">
-                        <path className="color-foreground" d="M0,1.71428571 C0,0.76752 0.76752,0 1.71428571,0 L22.2857143,0 C23.2325143,0 24,0.76752 24,1.71428571 C24,2.66105143 23.2325143,3.42857143 22.2857143,3.42857143 L1.71428571,3.42857143 C0.76752,3.42857143 0,2.66105143 0,1.71428571 Z" id="Path"></path>
-                        <path className="color-background" d="M0,10.2857143 C0,9.33894857 0.76752,8.57142857 1.71428571,8.57142857 L22.2857143,8.57142857 C23.2325143,8.57142857 24,9.33894857 24,10.2857143 C24,11.2325143 23.2325143,12 22.2857143,12 L1.71428571,12 C0.76752,12 0,11.2325143 0,10.2857143 Z" id="Path"></path>
-                        <path className="color-background" d="M10.2857143,18.8571429 C10.2857143,17.9103429 11.0532343,17.1428571 12,17.1428571 L22.2857143,17.1428571 C23.2325143,17.1428571 24,17.9103429 24,18.8571429 C24,19.8039429 23.2325143,20.5714286 22.2857143,20.5714286 L12,20.5714286 C11.0532343,20.5714286 10.2857143,19.8039429 10.2857143,18.8571429 Z" id="Path"></path>
-                      </g>
-                    </g>
-                  </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                </svg>
                 </div>
-                <span className="nav-link-text ms-1">RTL</span>
+                <span className="nav-link-text ms-1">Lista użytkowników</span>
               </a>
             </li>
-            <li className="nav-item mt-2">
-              <div className="d-flex align-items-center nav-link">
+            <li className="nav-item">
+            <a className={`nav-link ${Boolean(hoverContact) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverContact(true)}} onMouseLeave={() => {setHoverContact(false)}}>
+                <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                  <path className="color-foreground" d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                </svg>
+                </div>
+                <span className="nav-link-text ms-1">Kontakt</span>
+              </a>
+            </li>
+            <li className="nav-item mt-4">
+              <div className="d-flex align-items-center nav-link ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="ms-2" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                   <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
                 </svg>
-                <span className="font-weight-normal text-md ms-2">Account Pages</span>
+                <span className="font-weight-normal text-md ms-2">Panel użytkownika</span>
               </div>
             </li>
-            <li className="nav-item border-start my-0 pt-2">
-              <a className="nav-link position-relative ms-0 ps-2 py-2 " href="../pages/profile.html">
-                <span className="nav-link-text ms-1">Profile</span>
+            
+            <li className="nav-item">
+            <a className={`nav-link ${Boolean(hoverProfile) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverProfile(true)}} onMouseLeave={() => {setHoverProfile(false)}}>
+                <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                </svg>
+                </div>
+                <span className="nav-link-text ms-1">Twój profil</span>
               </a>
             </li>
-            <li className="nav-item border-start my-0 pt-2">
-              <a className="nav-link position-relative ms-0 ps-2 py-2 " href="../pages/sign-in.html">
-                <span className="nav-link-text ms-1">Sign In</span>
+            <li className="nav-item">
+            <a className={`nav-link ${Boolean(hoverSettings) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverSettings(true)}} onMouseLeave={() => {setHoverSettings(false)}}>
+                <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                </svg>
+                </div>
+                <span className="nav-link-text ms-1">Ustawienia konta</span>
               </a>
             </li>
-            <li className="nav-item border-start my-0 pt-2">
-              <a className="nav-link position-relative ms-0 ps-2 py-2 " href="../pages/sign-up.html">
-                <span className="nav-link-text ms-1">Sign Up</span>
+            <li className="nav-item">
+            <a className={`nav-link ${Boolean(hoverLogout) ? "active" : null }`} href="../pages/tables.html" onMouseEnter={() => {setHoverLogout(true)}} onMouseLeave={() => {setHoverLogout(false)}}>
+                <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center ps-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path className="color-foreground" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path className="color-foreground" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                </div>
+                <Link className="nav-link position-relative bg-transparent border-0 ms-0 ps-1" href={(route('logout'))} method="post" as="button">
+                <span className="nav-link-text ms-1">Wyloguj się</span>
+              </Link>
               </a>
-            </li>
-            <li className="nav-item border-start my-0 pt-2">
-            <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
-                                        </Dropdown.Link>
             </li>
           </ul>
         </div>
-        <div className="sidenav-footer mx-4 ">
-          <div className="card border-radius-md" id="sidenavCard">
-            <div className="card-body  text-start  p-3 w-100">
-              <div className="mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="text-primary" viewBox="0 0 24 24" fill="currentColor" id="sidenavCardIcon">
-                  <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
-                  <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                </svg>
-              </div>
-              <div className="docs-info">
-                <h6 className="font-weight-bold up mb-2">Need help?</h6>
-                <p className="text-sm font-weight-normal">Please check our docs.</p>
-                <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/corporate-ui-dashboard" target="_blank" className="font-weight-bold text-sm mb-0 icon-move-right mt-auto w-100 mb-0">
-                  Documentation
-                  <i className="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </aside>
     );
 }
