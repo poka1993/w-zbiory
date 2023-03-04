@@ -14,7 +14,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
               
   {/* menu boczne */}
   <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-  <Navigation />
+  <Navigation props={auth}/>
   <Profile />
       {/* <!-- End Navbar --> */}
       <div className="container-fluid py-4 px-3">

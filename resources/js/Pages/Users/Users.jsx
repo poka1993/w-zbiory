@@ -4,6 +4,7 @@ import UsersList from '@/Components/UsersList'
 import Footer from '@/Components/Footer'
 import { Head } from '@inertiajs/inertia-react';
 import React, { useState } from 'react';
+import NavButtons from '@/Components/NavButtons';
 
 
 export default function Users() {
@@ -22,9 +23,19 @@ export default function Users() {
 <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 <Navigation />
 <div className='ms-lg-6 me-lg-6 ms-3 me-3 text-align-center border-radius-md'>
-      <div className="col-12">
-          <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 bg-cover" style={{backgroundImage: `url('storage/img/header-blue2.jpg')`}}> 
+<div className="col-12">
+        <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 z-1">
+          <div className='nav-grapes-img'></div>        
+        </div>
       </div>
+      <div className='d-flex row'>
+
+    <div className='w-20'> 
+
+        <NavButtons />
+
+    </div>
+
     </div>
     <div className='d-flex align-items-center justify-content-center'>
     <div class="w-xxl-80 w-xl-80 w-lg-80 w-md-85 w-95"> 

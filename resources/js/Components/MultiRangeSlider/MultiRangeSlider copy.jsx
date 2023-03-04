@@ -10,6 +10,8 @@ const MultiRangeSlider = ({ min, max, params, onChange, onTouched }) => {
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef(null);
+console.log(params);
+  
 
   const [leftValue, handleLeft] = useState(false);
   const [rightValue, handleRight] = useState(false);
@@ -22,10 +24,8 @@ const MultiRangeSlider = ({ min, max, params, onChange, onTouched }) => {
 
   // Set width of the range to decrease from the left side
   useEffect(() => {
-    // const minPercent = getPercent(minVal);
-    const minPercent = Boolean(!leftValue) ? (Boolean(params) ? (params.min*2) : (min*2)) : getPercent(minVal);
-    // const maxPercent = getPercent(maxValRef.current);
-    const maxPercent = Boolean(!rightValue) ? (Boolean(params) ? (params.max*2) : (max*2)) : getPercent(maxVal);
+    const minPercent = getPercent(minVal);
+    const maxPercent = getPercent(maxValRef.current);
 
     if (range.current) {
       range.current.style.left = `${minPercent}%`;
@@ -35,8 +35,8 @@ const MultiRangeSlider = ({ min, max, params, onChange, onTouched }) => {
 
   // Set width of the range to decrease from the right side
   useEffect(() => {
-    const minPercent = Boolean(!leftValue) ? (Boolean(params) ? (params.min*2) : (min*2)) : getPercent(minVal);
-    const maxPercent = Boolean(!rightValue) ? (Boolean(params) ? (params.max*2) : (max*2)) : getPercent(maxVal);
+    const minPercent = getPercent(minValRef.current);
+    const maxPercent = getPercent(maxVal);
 
     if (range.current) {
       range.current.style.width = `${maxPercent - minPercent}%`;

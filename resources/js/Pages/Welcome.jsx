@@ -5,9 +5,17 @@ import Navigation from '@/Components/Navigation'
 import Statistics from '@/Components/Statistics'
 import Wines from '@/Components/Wines/Wines'
 import Footer from '@/Components/Footer'
+import Cookies from 'js-cookie';
 
 
 export default function Welcome(props) {
+    let data;
+    if (document.cookie.indexOf('user_filter') == -1 ) {
+        data = props.filter;
+    } else {
+        data = JSON.parse(Cookies.get('user_filter'));
+    }
+    
     return (
         <>
         {/* // <AuthenticatedLayout
@@ -24,8 +32,8 @@ export default function Welcome(props) {
 <Statistics />
     {/* <!-- End Navbar --> */}
     <div className="container-fluid py-4 px-3">
-      <Filter />
-      <Wines />      
+      <Filter wines={props.wines} props={props.auth.user} paramsFilter={data}/>
+      <Wines wines={props.wines}/>      
       <Footer />  
     </div>
   </main>                  

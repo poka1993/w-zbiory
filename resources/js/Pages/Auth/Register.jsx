@@ -11,6 +11,7 @@ import "react-datetime/css/react-datetime.css";
 import Datetime from "react-datetime";
 import moment from 'moment';
 import 'moment/dist/locale/pl';
+import NavButtons from '@/Components/NavButtons';
 
 moment.locale('pl');
 
@@ -71,9 +72,18 @@ export default function Register() {
             <Head title="Rejestracja konta" />
 
             <div className='ms-lg-6 me-lg-6 ms-3 me-3 text-align-center border-radius-md'>
-      <div className="col-12">
-          <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 bg-cover" style={{backgroundImage: `url('storage/img/header-blue2.jpg')`}}> 
-      </div>
+            <div className="col-12">
+        <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 z-1">
+          <div className='nav-grapes-img'></div>        
+        </div>
+        <div className='d-flex row'>
+        <div className='w-20'> 
+
+        <NavButtons />
+
+        </div>
+
+        </div>
         <div className='d-flex'>
             <div class="w-100"> 
             <div class="row mt-sm-n7 mt-n8 align-items-center justify-content-center">

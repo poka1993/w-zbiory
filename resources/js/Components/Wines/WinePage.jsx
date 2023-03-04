@@ -7,13 +7,21 @@ import React, { useState, useEffect } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import {flags} from '@/Components/Flags';
 import DishComponent from '@/Components/DishCompontent';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import { useImageSize } from 'react-image-size';
 
-export default function WinePage({  }) {
+export default function WinePage({ wine, dimensionsImg }) {
+
+  let dimensionsImgWidth = dimensionsImg ? dimensionsImg.width : null ;
+  let dimensionsImgHeight = dimensionsImg ? dimensionsImg.height : null ;
+
+  const dishes = Boolean(wine.dishes) ? wine.dishes.map(dish => <DishComponent label={dish} />) : <p class="text-xs text-secondary opacity-50 ms-n2 ">Brak propozycji</p>;
 
   const [selectedList, setSelectedList] = useState("Najnowsze opinie");
 
-  function flagIcon(code) {
-    return <div className="ms-1 me-1 d-inline-block text-lg">{flags.filter((d) => d.value == code)[0].icon}</div>
+  function flagIcon(data) {
+    let flag = flags.filter((d) => d.label == data)[0];
+    return <div className="ms-1 me-1 d-inline-block text-lg">{flag.icon}</div>
   }
 
   const { width } = useWindowDimensions();
@@ -49,6 +57,8 @@ export default function WinePage({  }) {
   const onPointerEnter = () => console.log('Enter')
   const onPointerLeave = () => console.log('Leave')
   const onPointerMove = (value, index) => console.log(value, index)
+
+
     return (
         <>
              <AddOpinion />
@@ -61,23 +71,23 @@ export default function WinePage({  }) {
                     <div class="d-none d-sm-flex col-xxl-2 col-lg-3 col-md-4 col-sm-4 p-xxl-0 p-md-4 p-lg-2 p-xl-4 p-0 z-index-3">
 
 
-                      <div className="wine-card d-flex w-100 h-100 row align-content-center">
+                      <div className="wine-card d-flex w-auto h-100 ms-auto me-auto row align-content-center">
                         <div>
                     <ReactImageMagnify {...{
     smallImage: {
         alt: 'Wristwatch by Ted Baker London',
         isFluidWidth: true,
-
-        src: "storage/wines/pol_pl_Lamita-Chardonnay-403_2.png",
+        src: "storage/" + wine.image,
     },
     largeImage: {
-        src: "storage/wines/pol_pl_Lamita-Chardonnay-403_2.png",
-        width: 825,
-        height: 1500,
+        src: "storage/" + wine.image,
+        width: dimensionsImgWidth,
+        height: dimensionsImgHeight
     },
     enlargedImageStyle: { backgroundColor: '#fff' },
+    enlargedImageContainerDimensions: {width: '100%', height: '100%'},
     enlargedImageContainerStyle: { borderRadius: '6px', boxShadow: "0 2px 12px 0 rgba(0, 0, 0, 0.16)" },
-    
+    imageStyle: {maxHeight: '600px'} 
 }} />
 
 </div>  
@@ -101,32 +111,26 @@ export default function WinePage({  }) {
                   </div>
                 </div>
               </div>
-              <div className='d-flex flex-row'>
-              <div class="d-flex d-sm-none col-3">
-              <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 mb-6">
-                        <img src="storage/wines/pol_pl_Lamita-Chardonnay-403_2.png" alt="wine_image" />
+              <div className='d-flex flex-column flex-sm-row'>
+              <div class="d-sm-none col-12 mt-3 mb-7">
+              <div className="wine-shape text-center text-white mx-auto d-flex align-items-center justify-content-center mt-6 px-2 mb-3 w-100">
+                        <img src={`storage/${wine.image}`} alt={wine.name} />
                       </div>  
                   </div>
-              <div class="card-body col-9 col-sm-12 p-3 pt-0">
+              <div class="card-body col-12 p-3 pt-0">
                 <span class="row font-weight-semibold text-dark d-flex flex-grow-1 ps-3">
-                          <p class="text-sm mb-1">Kolor: <b>Białe</b></p>
-                          <p class="text-sm mb-1">Smak: <b>Wytrawne</b></p>
-                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon("Ar")}<b>Argentyna</b></p>
-                          <p class="text-sm mb-1">Rodzaj: <b>Spokojne</b></p>
-                          <p class="text-sm mb-1">Cena hurtowa: <b>40,00 zł</b></p>
+                          <p class="text-sm mb-1">Kolor: <b>{wine.color}</b></p>
+                          <p class="text-sm mb-1">Smak: <b>{wine.taste}</b></p>
+                          <p class="text-sm mb-1 d-flex align-items-center">Kraj: {flagIcon(wine.country)}<b>{wine.country}</b></p>
+                          <p class="text-sm mb-1">Rodzaj: <b>{wine.type}</b></p>
+                          <p class="text-sm mb-1">Cena hurtowa: <b>{Number(wine.vol).toFixed(2)} zł</b></p>
                           <p class="text-sm mb-1">Zawartość alkoholu:</p>
-                          <p className='text-sm text-center ms-2 w-80 mb-0'><b>25%</b></p>
-                          <div class="progress p-0 ms-2 w-80">
-                      <div class="progress-bar progress-bar-lg bg-gradient-dark w-25" role="progressbar"></div>
-
-                    </div>
+                          <p className='text-sm text-center ms-2 w-80 mb-0'><b>{Number(wine.vol).toFixed(1)} %</b></p>
+                    <ProgressBar className='ms-2 ps-0 w-80' variant="dark" now={wine.vol} />
                           <p class="text-sm mb-1 mt-3">Najlepiej podawać do:</p>
 
                           <div class="d-flex row ps-4">
-<DishComponent label="Dziczyzna"/>
-<DishComponent label="Zupy"/>
-<DishComponent label="Sałatki"/>
-<DishComponent label="Sery delikatne"/>
+                  {dishes}
               </div>
                     
                     </span>
@@ -263,7 +267,8 @@ export default function WinePage({  }) {
               <div class="card-body p-3 pt-0">
               <ul class="list-group">
               <li class="list-group-item border-0 d-flex flex-column px-0 mb-n2 mt-n2 ms-2">
-                          <p class="text-sm mb-1">Wino o słonecznej barwie z zielonkawymi przebłyskami i mocnych aromatach cytrusów oraz owoców tropikalnych przemieszanych z nutami białych kwiatów. W ustach lekkie i orzeźwiające, o długiej owocowej końcówce.<br /><br />
+                          <p class="text-sm mb-1">
+                            {/* Wino o słonecznej barwie z zielonkawymi przebłyskami i mocnych aromatach cytrusów oraz owoców tropikalnych przemieszanych z nutami białych kwiatów. W ustach lekkie i orzeźwiające, o długiej owocowej końcówce.<br /><br />
 
 LAMITA CHARDONNAY<br /><br />
 
@@ -274,7 +279,9 @@ Pojemność: 750 ml<br />
 Temperatura serwowania: 8-10°C<br />
 Certyfikaty: Vegan Friendly<br /><br />
 
-Sugestie kulinarne: do przystawek, lekkich sałatek, białych ryb, owoców morza.</p>
+Sugestie kulinarne: do przystawek, lekkich sałatek, białych ryb, owoców morza. */}
+{Boolean(wine.description) ? wine.description : "Jeszcze nikt nie dodał opisu dla tego wina."}
+</p>
 
                 </li>
               </ul>

@@ -16,9 +16,13 @@
   }
 }
 
+.wine-name-link:hover {
+  color: #55a6f8;
+}
+
 .wine-shape {
-  width: calc($icon-xl-width * 1.5);
-  height: calc($icon-xl-width * 1.5);
+  width: $icon-xl-width;
+  height: $icon-xl-width;
   background-position: $icon-shape-bg-position;
   border-radius: $border-radius-lg;
 
@@ -34,20 +38,8 @@
   }
 
   img {
-    width: 125px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 576px) {
-  .wine-shape {
-    width: $icon-xl-width;
-    height: $icon-xl-width;
-    
-    img {
-      width: 90px;
-      height: 180px;
-    }
+    width: auto;
+    height: 300px;
   }
 }
 

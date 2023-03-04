@@ -63,11 +63,145 @@
 @import 'cards/card-background';
 
 .nav-grapes {
-  background-size: cover;
 
-  opacity: 0.75;
+  background-image: url("storage/img/header-blue2.png");
+  opacity: 1;
   background-repeat: no-repeat;
-  background-position: 100% 30%;
-  position: relative;
+  background-position: 70% 40%;
+  display: block;
+  background-origin: 0;
   height: 160px;
+}
+
+@media (min-width: 1800.00px) {
+  .nav-grapes {
+    background-size: cover;
+  }
+}
+
+
+
+
+.nav-grapes-img {
+background-image: url("storage/img/grapes-nav.png");
+height: 178px;
+width: 470px;
+position: absolute;
+background-repeat: no-repeat;
+left: 30%;
+bottom: 0;
+}
+
+.nav-grapes-logo {
+  background-image: url("storage/img/logo-grape.png");
+  background-size: cover;
+  height: 70px;
+  width: 70px;
+  margin-top: -210px;
+  margin-left: 225px;
+  position: absolute;
+}
+
+.nav-facebook-icon {
+  background-image: url("storage/img/facebook-icon.png");
+  background-size: cover;
+  height: 24px;
+  width: 24px;
+  margin-top: -196px;
+  margin-left: 304px;
+  position: absolute;
+}
+
+.nav-instagram-icon {
+  background-image: url("storage/img/instagram-icon.png");
+  background-size: cover;
+  height: 24px;
+  width: 24px;
+  margin-top: -196px;
+  margin-left: 334px;
+  position: absolute;
+}
+
+@media (max-width: 767px) {
+  .nav-grapes-logo {
+    margin-left: 80px;
+    margin-top: -211px;
+  }
+  .nav-facebook-icon {
+    margin-left: 18px;
+  }
+  .nav-instagram-icon {
+    margin-left: 48px;
+  }
+  .nav-buttons {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-grapes-logo {
+    margin-left: 20px;
+  }
+  .nav-facebook-icon {
+    display: none;
+  }
+  .nav-instagram-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .nav-grapes-logo {
+    height: 45px;
+    width: 45px;
+    margin-top: -216px;
+  }
+}
+
+@media (max-width: 315px) {
+  .nav-grapes-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-grapes-img {
+    display: none;
+  }
+  .nav-grapes {
+    background-position: 80% 25%;
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-font-logo {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .nav-font-logo {
+    margin-left: -7px;
+    margin-top: -6px;
+  }
+}
+
+.nav-font-logo {
+  background-image: url("storage/img/logo-font.png");
+  background-size: cover;
+  height: 50px;
+  width: 200px;
+}
+
+.nav-font-logo:hover {
+  opacity: 0.75;
+}
+
+.wine-card-magnify img {
+  max-height: 500px;
+  max-width: 100%;
+}
+
+.wine-card-large img {
+  max-height: 200%;
 }

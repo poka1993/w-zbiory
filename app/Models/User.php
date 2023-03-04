@@ -15,6 +15,11 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    public function wines() {
+        return $this->hasMany(Wine::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

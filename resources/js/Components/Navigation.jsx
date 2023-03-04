@@ -19,18 +19,25 @@ export default function Navigation({props}) {
         
         
       <nav aria-label="breadcrumb">
-        <div className='d-flex'>
-          <img src="" height="60" width={60} className="font-weight-bold mb-0" />
-          <h3 className="font-weight-bold mb-0 mt-2 ms-3">Winozbiory.pl</h3>
-        </div>
+
+        <Link type="button" className='d-flex mb-n3 nav-font-logo border-0' href={('/')} method="get" as="button"></Link>
 
 
 
 
         </nav>
-        <div className="d-flex flex-grow-1 mt-sm-0 mt-n3 mb-n3 mb-sm-0 me-md-0 me-sm-4 b justify-content-end" id="navbar">
-          <div className="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div className="d-none d-sm-flex input-group">
+        <div className="d-flex flex-grow-1 justify-content-end nav-buttons" id="navbar">
+          <div className="ms-lg-auto pe-lg-3 d-flex align-items-center">
+          <li className="nav-item ps-3 me-3 d-flex align-items-center">
+              <a className="nav-link text-body p-0"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="iconNavbarSidenav">
+                <div className="sidenav-toggler-inner">
+                  <i className="sidenav-toggler-line"></i>
+                  <i className="sidenav-toggler-line"></i>
+                  <i className="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+            <div className="d-none d-lg-flex me-n2 input-group">
               <span className="input-group-text text-body bg-white border-end-0 ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -43,15 +50,14 @@ export default function Navigation({props}) {
 
 
 
-                <button type="button" className="d-flex d-sm-none d-flex btn btn-white btn-icon mt-3 px-2 py-2 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+                <button type="button" className="d-flex d-lg-none d-flex btn btn-white btn-icon m-0 ms-n1 me-n1 px-2 py-2 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
-                <div class="collapse w-100" id="collapseExample">
-</div>
+                <div class="collapse w-100" id="collapseExample"></div>
                 </button>   
 
-                <div class="offcanvas offcanvas-top offcanvas-search d-sm-none" height="30" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel">
+                <div class="offcanvas offcanvas-top offcanvas-search d-lg-none" height="30" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel">
   <div class="offcanvas-header w-100 pb-0">
     <h5 id="offcanvasTopLabel">Wyszukiwarka</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -63,7 +69,7 @@ export default function Navigation({props}) {
     </button>
   </div>
   <div class="offcanvas-body">
-  <div className="d-flex d-sm-none input-group">
+  <div className="d-flex d-lg-none input-group">
               <span className="input-group-text text-body bg-white border-end-0 ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -74,20 +80,11 @@ export default function Navigation({props}) {
   </div>
 </div>
 
-<li className="nav-item ps-3 d-flex align-items-center">
-              <a className="nav-link text-body p-0"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="iconNavbarSidenav">
-                <div className="sidenav-toggler-inner">
-                  <i className="sidenav-toggler-line"></i>
-                  <i className="sidenav-toggler-line"></i>
-                  <i className="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
 
-
-
+            {props ? 
+              <>
               <li className="nav-item dropdown px-3 d-flex align-items-center">
-              <a className="nav-link text-body p-0 d-none d-sm-block" id="dropdownSettingsButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link text-body p-0 d-none d-sm-block ms-lg-n2" id="dropdownSettingsButton" data-bs-toggle="dropdown" aria-expanded="false">
               <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" className="fixed-plugin-button-nav cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
                   <path fillRule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clipRule="evenodd" />
                 </svg>
@@ -163,6 +160,8 @@ export default function Navigation({props}) {
               </ul>
 
 
+
+
               <a className="nav-link text-body p-0 d-block d-sm-none" id="dropdownSettingsButton" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings" aria-controls="offcanvasSettings">
               <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" className="fixed-plugin-button-nav cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
                   <path fillRule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clipRule="evenodd" />
@@ -191,6 +190,7 @@ export default function Navigation({props}) {
   </div>
 </div>
             </li>
+            </> : null}
 
 
 
@@ -207,7 +207,7 @@ export default function Navigation({props}) {
 
 
 
-
+            {props ? 
             <li className="nav-item dropdown pe-2 d-flex align-items-center">
               <a className="nav-link text-body p-0 d-none d-sm-block" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="fixed-plugin-button-nav cursor-pointer">
@@ -282,7 +282,7 @@ export default function Navigation({props}) {
                   </a>
                 </li>
               </ul>
-              <a className="nav-link text-body p-0 d-block d-sm-none" id="dropdownSettingsButton" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotifications" aria-controls="offcanvasNotifications">
+              <a className="nav-link text-body p-0 d-block d-sm-none me-n1" id="dropdownSettingsButton" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotifications" aria-controls="offcanvasNotifications">
               <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="fixed-plugin-button-nav cursor-pointer">
                   <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clipRule="evenodd" />
                 </svg>
@@ -370,8 +370,11 @@ export default function Navigation({props}) {
   </div>
 </div>
             </li>
+            : null}
+
+
             {props ? null :
-            <button type="button" onClick={handleShow} class="btn btn-sm btn-dark btn-icon d-flex align-items-end m-auto ms-3 text-nowrap" >
+            <button type="button" onClick={handleShow} class="btn btn-sm btn-dark btn-icon d-flex align-items-end m-auto ms-3 ms-lg-2 me-n1 me-lg-5 text-nowrap" >
             <span class="btn-inner--icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-key-fill me-2" viewBox="0 0 15 15">
   <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
@@ -382,11 +385,12 @@ export default function Navigation({props}) {
           }
 
 
-
-            <li className="nav-item dropdown ps-2 d-flex align-items-center d-flex">
+            {props ? 
+            <li className="nav-item dropdown ps-2 d-flex align-items-center d-flex me-lg-5">
               <a type="button" className="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="storage/img/team-2.jpg" className="avatar avatar-sm" alt="avatar" />
               </a>
+              
 
               <ul class="dropdown-menu dropdown-menu-end me-n3">
     <li><a class="dropdown-item">Twój profil</a></li>
@@ -397,6 +401,7 @@ export default function Navigation({props}) {
   </ul>
 
               </li>
+              : null}
           </ul>
         </div>
       </div>
