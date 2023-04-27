@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Opinion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class OpinionController extends Controller
 {
@@ -35,7 +37,27 @@ class OpinionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::id();
+        $wine_id = $request->get('wine_id');
+        $opinion = $request->get('opinion');
+
+        $validated = $request->validate([
+            'wine_id' => 'required|int',
+            'opinion' => 'required|string|min:10|max:3000',
+        ], [
+            'required' => 'Przed wysłaniem należy uzupełnić treść opinii.',
+            'min' => 'Opinia musi zawierać minimalnie :min znaków.',
+            'max' => 'Opinia może zawierać maksymalnie :max znaków.',
+        ]);
+
+        $new_opinion = Opinion::create([
+            'user_id' => $user_id,
+            'wine_id' => $wine_id,
+            'opinion' => $opinion
+        ]);
+
+        return redirect()->back();
+        // return redirect()->back()->with('success', 'Twoja opinia została opublikowana, dziękujemy.');
     }
 
     /**

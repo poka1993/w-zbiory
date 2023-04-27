@@ -12,6 +12,22 @@ class Wine extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+    
+    public function opinion() {
+        return $this->hasMany(Opinion::class);
+    }
+
+    public function rate() {
+        return $this->hasMany(Rate::class);
+    }
+
+    public function favorite() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function notification() {
+        return $this->hasMany(Notification::class);
+    }
 
     protected $fillable = [
         'name',

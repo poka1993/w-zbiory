@@ -20,6 +20,26 @@ class User extends Authenticatable
         return $this->hasMany(Wine::class);
     }
 
+    public function opinion() {
+        return $this->hasMany(Opinion::class);
+    }
+
+    public function comment() {
+        return $this->hasMany(Opinion::class);
+    }
+
+    public function rate() {
+        return $this->hasMany(Rate::class);
+    }
+
+    public function favorite() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function natification() {
+        return $this->hasMany(Notification::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,7 +53,8 @@ class User extends Authenticatable
         'sex',
         'birthday',
         'locality',
-        'avatar'
+        'avatar',
+        'description'
     ];
 
     /**

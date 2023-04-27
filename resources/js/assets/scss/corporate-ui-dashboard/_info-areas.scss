@@ -43,9 +43,23 @@
   }
 }
 
+@media (max-width: 350px) {
+  .wine-shape img {
+    height: 250px;
+  }
+}
 @media (max-width: 300px) {
+  .wine-shape img {
+    height: 200px;
+  }
   .food-icons {
     max-width: 120% !important;
+  }
+}
+
+@media (max-width: 280px) {
+  .wine-shape img {
+    height: 200px;
   }
 }
 

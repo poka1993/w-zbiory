@@ -16,6 +16,7 @@ import InputError from '@/Components/InputError';
 import NavButtons from '@/Components/NavButtons';
 
 export default function AddWine(props) {
+  const title = "Dodaj wino";
   const user = usePage().props.auth.user;
 
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -31,8 +32,6 @@ export default function AddWine(props) {
     description: null,
     author: user.id
   });
-
-console.log(errors);
 
   const handleWineName = (e) => {
     setData({
@@ -63,7 +62,6 @@ console.log(errors);
   }
 
   const handleWineImage = (e) => {
-    console.log(e.target.files)
     setData({
       ...data,
       image: e.target.files[0]
@@ -161,22 +159,11 @@ console.log(errors);
   for (let i=0; i<dishDiv.length; i++) {
   dishOptions.push(dishDiv[i]);
   }
-  
-
-  // [
-  //   { value: 'chocolate', label: <div className='d-flex align-items-center gap-2'>{flags[0].value}{flags[0].label}</div>  },
-  //   { value: 'Stany Zjednoczone', label: <div className='d-flex align-items-center gap-2'><Us /> Stany Zjednoczone</div> },
-  //   { value: 'chocolate2', label: <div className='d-flex align-items-center gap-2'><Af /> Afganistan </div> },
-  //   flagsDiv[0],
-  //   flagsDiv[1],
-  //   { value: 'strawberry', label: 'Strawberry' },
-  //   { value: 'vanilla', label: 'Vanilla' }
-  // ]
 
   const DropdownIndicator = props => {
     return (
       <components.DropdownIndicator {...props}>
-  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="#4d4d4d" class="ms-2 bi bi-caret-down-fill me-1" viewBox="0 0 16 16">
+  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="#4d4d4d" className="ms-2 bi bi-caret-down-fill me-1" viewBox="0 0 16 16">
   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 </svg>
       </components.DropdownIndicator>
@@ -184,13 +171,16 @@ console.log(errors);
   };
 
   return (
-    <> 
-          <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-          <Navigation props={props.auth.user}/>
+    <>
+            <Head>
+            <title>{title}</title>
+            <meta head-key="description" name="description"
+            content="Portal internetowy gromadzący najlepsze marki wina oraz opinie na ich temat. Zbiór winogronowych trunków, który pozwala skompletować listę ulubionych produktów." />
+            </Head>
+          <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-auto d-flex flex-column min-vh-100">
+          <Navigation props={props.auth.user} notifications={props.notifications} new_notifications={props.new_notifications} title={title}/>     
 
-        <Head title="Dodaj wino" />
-
-        <div className='ms-3 me-3 ms-lg-6 me-lg-6 text-align-center border-radius-md'>
+        <div className='ms-3 me-3 ms-lg-6 me-lg-6 text-align-center border-radius-md flex-grow-1'>
         <div className="col-12">
         <div className="card shadow-xs border mb-1 pb-3 nav-grapes pt-5 pb-6 z-1">
           <div className='nav-grapes-img'></div>        
@@ -201,70 +191,70 @@ console.log(errors);
         </div>
 
     </div>
-    <div className='d-flex'>
-        <div class="w-100"> 
-        <div class="row m-n3 m-sm-0 mt-sm-n7 mt-n8 align-items-center justify-content-center">
-            <div class="col-11 d-sm-inline">
-                <div class="card blur border border-white mb-4 shadow-xs d-flex flex-row row">         
-                <div class="col d-flex flex-column">
-          <div class="card card-plain mt-2">
-            <div class="card-header pb-0 text-left bg-transparent">
-              <h3 class="font-weight-black text-dark display-6">Dodaj wino</h3>
-              <p class="mb-0">Jeżeli brakuje wina, które zasługuje na znalezienie się w naszej bazie prosimy o je dodanie za pomocą formularza!</p>
+    <div className='d-flex '>
+        <div className="w-100"> 
+        <div className="row m-n3 m-sm-0 mt-sm-n7 mt-n8 align-items-center justify-content-center">
+            <div className="col-11 d-sm-inline">
+                <div className="card blur border border-white mb-4 shadow-xs d-flex flex-row row">         
+                <div className="col d-flex flex-column">
+          <div className="card card-plain mt-2">
+            <div className="card-header pb-0 text-left bg-transparent">
+              <h3 className="font-weight-black text-dark display-6">Dodaj wino</h3>
+              <p className="mb-0">Jeżeli brakuje wina, które zasługuje na znalezienie się w naszej bazie prosimy o je dodanie za pomocą formularza!</p>
             </div>
             <form onSubmit={submit}>
-            <div class="card-body d-flex flex-column row flex-md-row ps-0 pe-0 ps-sm-4 pe-sm-4">
-            <div class="col-12 col-lg-6 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
+            <div className="card-body d-flex flex-column row flex-md-row ps-0 pe-0 ps-sm-4 pe-sm-4">
+            <div className="col-12 col-lg-6 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
             <label>Nazwa wina</label>
                 <div className="d-flex">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Podaj nazwę</span>
-                      <input type="text" class="form-control" placeholder="Nie podano nazwy wina" aria-label="Name" aria-describedby="name" value={data.name} onChange={handleWineName} />
+                  <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1">Podaj nazwę</span>
+                      <input type="text" className="form-control" placeholder="Nie podano nazwy wina" aria-label="Name" aria-describedby="name" value={data.name || ""} onChange={handleWineName} />
                   </div>
                 </div>
                 <InputError message={errors.name} className="mt-2" />
 
                 <label>Kolor wina</label>
-                <div class="mb-3">
-                <div class="btn-group d-flex align-items-end mb-0 ms-sm-auto " role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="wineColor" id="btnradiocolor1" autocomplete="off" value='Czerwone' onClick={handleWineColor} />
-                    <label class="btn btn-white px-1 mb-0 " for="btnradiocolor1">Czerwone</label>
-                    <input type="radio" class="btn-check" name="wineColor" id="btnradiocolor2" autocomplete="off" value='Różowe' onClick={handleWineColor} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiocolor2">Różowe</label>
-                    <input type="radio" class="btn-check" name="wineColor" id="btnradiocolor3" autocomplete="off" value='Białe' onClick={handleWineColor} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiocolor3">Białe</label>
+                <div className="mb-3">
+                <div className="btn-group d-flex align-items-end mb-0 ms-sm-auto " role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check" name="wineColor" id="btnradiocolor1" autoComplete="off" value='Czerwone' onClick={handleWineColor} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiocolor1">Czerwone</label>
+                    <input type="radio" className="btn-check" name="wineColor" id="btnradiocolor2" autoComplete="off" value='Różowe' onClick={handleWineColor} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiocolor2">Różowe</label>
+                    <input type="radio" className="btn-check" name="wineColor" id="btnradiocolor3" autoComplete="off" value='Białe' onClick={handleWineColor} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiocolor3">Białe</label>
                   </div>                
                 </div>
                 <InputError message={errors.color} className="mt-2" />
 
                 <label>Smak wina</label>
-                <div class="mb-3">
-                  <div class="btn-group d-flex align-items-end mb-0 ms-sm-auto" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check " name="btnradiotaste" id="btnradiotaste1" autocomplete="off" value='Wytrawne' onClick={handleWineTaste} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotaste1">
+                <div className="mb-3">
+                  <div className="btn-group d-flex align-items-end mb-0 ms-sm-auto" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check " name="btnradiotaste" id="btnradiotaste1" autoComplete="off" value='Wytrawne' onClick={handleWineTaste} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotaste1">
                       <span className='d-none d-sm-block'>Wytrawne</span><span className='d-sm-none'>Wytr.</span></label>
-                    <input type="radio" class="btn-check" name="btnradiotaste" id="btnradiotaste2" autocomplete="off" value='Półwytrawne' onClick={handleWineTaste} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotaste2">
+                    <input type="radio" className="btn-check" name="btnradiotaste" id="btnradiotaste2" autoComplete="off" value='Półwytrawne' onClick={handleWineTaste} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotaste2">
                       <span className='d-none d-sm-block'>Półwytrawne</span><span className='d-sm-none'>Półwytr.</span></label>
-                    <input type="radio" class="btn-check" name="btnradiotaste" id="btnradiotaste3" autocomplete="off" value='Półsłodkie' onClick={handleWineTaste} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotaste3">
+                    <input type="radio" className="btn-check" name="btnradiotaste" id="btnradiotaste3" autoComplete="off" value='Półsłodkie' onClick={handleWineTaste} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotaste3">
                       <span className='d-none d-sm-block'>Półsłodkie</span><span className='d-sm-none'>Półsłod.</span></label>
-                    <input type="radio" class="btn-check" name="btnradiotaste" id="btnradiotaste4" autocomplete="off" value='Słodkie' onClick={handleWineTaste} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotaste4">
+                    <input type="radio" className="btn-check" name="btnradiotaste" id="btnradiotaste4" autoComplete="off" value='Słodkie' onClick={handleWineTaste} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotaste4">
                       <span className='d-none d-sm-block'>Słodkie</span><span className='d-sm-none'>Słod.</span></label>
                   </div>                
                 </div>
                 <InputError message={errors.taste} className="mt-2" />
 
                 <label>Rodzaj wina</label>
-                <div class="mb-3">
-                <div class="btn-group d-flex align-items-end mb-0 ms-sm-auto" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check " name="btnradiotype" id="btnradiotype1" autocomplete="off" value='Spokojne' onClick={handleWineType} />
-                    <label class="btn btn-white px-1 mb-0 " for="btnradiotype1">Spokojne</label>
-                    <input type="radio" class="btn-check" name="btnradiotype" id="btnradiotype2" autocomplete="off" value='Musujące' onClick={handleWineType} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotype2">Musujące</label>
-                    <input type="radio" class="btn-check" name="btnradiotype" id="btnradiotype3" autocomplete="off" value='Grzane' onClick={handleWineType} />
-                    <label class="btn btn-white px-1 mb-0" for="btnradiotype3">Grzane</label>
+                <div className="mb-3">
+                <div className="btn-group d-flex align-items-end mb-0 ms-sm-auto" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check " name="btnradiotype" id="btnradiotype1" autoComplete="off" value='Spokojne' onClick={handleWineType} />
+                    <label className="btn btn-white px-1 mb-0 " htmlFor="btnradiotype1">Spokojne</label>
+                    <input type="radio" className="btn-check" name="btnradiotype" id="btnradiotype2" autoComplete="off" value='Musujące' onClick={handleWineType} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotype2">Musujące</label>
+                    <input type="radio" className="btn-check" name="btnradiotype" id="btnradiotype3" autoComplete="off" value='Grzane' onClick={handleWineType} />
+                    <label className="btn btn-white px-1 mb-0" htmlFor="btnradiotype3">Grzane</label>
                   </div>               
                 </div>
                 <InputError message={errors.type} className="mt-2" />
@@ -276,18 +266,18 @@ console.log(errors);
 
 
 
-            <div class="col-12 col-lg-6 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
+            <div className="col-12 col-lg-6 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
                 <label>Zdjęcie wina</label>
-                <div class="mb-3">
-                  <input type="file" class="form-control" placeholder="Wprowadź nazwę wina" aria-label="Login" aria-describedby="login-addon" onChange={handleWineImage}/>
+                <div className="mb-3">
+                  <input type="file" className="form-control" placeholder="" aria-label="Login" aria-describedby="login-addon" onChange={handleWineImage}/>
                 </div>
                 <InputError message={errors.image} className="mt-2" />
 
                 <label>Kraj pochodzenia</label>
-                <div class="mb-3">
+                <div className="mb-3">
 
-                <div class="input-group mb-3 flex-nowrap">
-                <span class="input-group-text border-end-0" id="basic-addon1"><span className='d-none d-sm-block'>Wybierz kraj</span><span className='d-sm-none'>Kraj</span></span>  
+                <div className="input-group mb-3 flex-nowrap">
+                <span className="input-group-text border-end-0" id="basic-addon1"><span className='d-none d-sm-block'>Wybierz kraj</span><span className='d-sm-none'>Kraj</span></span>  
                     <Select
                         components={{ DropdownIndicator }}
                         // isMulti="true"
@@ -323,20 +313,20 @@ console.log(errors);
 
                 <label>Zawartość alkoholu</label>
                 <div className="d-flex">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">%</span>
-                      <input type="number" class="form-control" id="alcohol" placeholder="Nie podano zawartości alkoholu" aria-label="Alcohol" aria-describedby="alcohol"
-                      value={data.vol} onChange={handleWineVol} />
+                  <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1">%</span>
+                      <input type="number" className="form-control" id="alcohol" placeholder="Nie podano zawartości alkoholu" aria-label="Alcohol" aria-describedby="alcohol"
+                      value={data.vol || ""} onChange={handleWineVol} />
                   </div>
                 </div>
                 <InputError message={errors.vol} className="mt-2" />
 
                 <label>Cena hurtowa</label>
                 <div className="d-flex">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">zł</span>
-                      <input type="number" class="form-control" id="prize" placeholder="Nie podano ceny wina" aria-label="Prize" aria-describedby="prize"
-                      value={data.prize} onChange={handleWinePrize} />
+                  <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1">zł</span>
+                      <input type="number" className="form-control" id="prize" placeholder="Nie podano ceny wina" aria-label="Prize" aria-describedby="prize"
+                      value={data.prize || ""} onChange={handleWinePrize} />
                   </div>
                 </div>
                 <InputError message={errors.prize} className="mt-2" />
@@ -350,17 +340,17 @@ console.log(errors);
 
 
 
-            <div class="col-12 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
+            <div className="col-12 col-xl-4 d-sm-inline ps-sm-2 pe-sm-2">
                 <label>Z czym najlepiej podawać (opcjonalnie max. 4)</label>
                 <div className="d-flex">
-                <div class="input-group mb-3 flex-nowrap">
-                <span class="input-group-text border-end-0" id="basic-addon1"><span className='d-none d-sm-block'>Wybierz danie</span><span className='d-sm-none'>Danie</span></span>
+                <div className="input-group mb-3 flex-nowrap">
+                <span className="input-group-text border-end-0" id="basic-addon1"><span className='d-none d-sm-block'>Wybierz danie</span><span className='d-sm-none'>Danie</span></span>
                     <Select
                         components={{ DropdownIndicator }}
                         isMulti
                         name="colors"
                         options={(selectedDishOptions.length >= 4) ? [{value: "", label: <span className='d-flex justify-content-center'>Można wybrać max. 4 dania</span>}, ...dishOptions] : dishOptions}
-                        value={selectedDishOptions}
+                        value={selectedDishOptions || ""}
                         className="flex-grow-1 p-0 m-0 border-0 form-control"
                         classNamePrefix="select"
                         placeholder="Nie wybrano dań"
@@ -392,79 +382,31 @@ console.log(errors);
 </div>
 <InputError message={errors.dishes} className="mt-2" />
 
-{/* <label>Z czym najlepiej podawać</label>
-                <div className="d-flex">
-                <div class="input-group mb-3 flex-nowrap">
-  <span class="input-group-text d-none d-sm-block" id="basic-addon1">Wybierz danie</span>  
-                    <label class="btn btn-white px-3 mb-0 flex-grow-1 font-weight-normal text-dark text-start text-nowrap">Nie wybrano dań</label>
-                    <label class="btn btn-white px-2 px-xxl-3 mb-0 ps-2 border-start-0">
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-caret-down-fill" viewBox="0 0 16 16">
-  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-</svg>
-              </label>
-</div>
-</div> */}
-
-
-{/* <label>Najlepiej podawać razem</label>
-                <div className="d-flex">
-                <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Wybierz danie</span>  
-
-
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="px-3 mb-0 shadow-xxs bg-white text-center border border-radius-md d-flex align-items-center justify-content-center flex-grow-1">
-                <img src="storage/food/cow-black.png" height="30" width="30" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-              <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="px-3 mb-0 shadow-xxs bg-white text-center border border-radius-md d-flex align-items-center justify-content-center flex-grow-1">
-                <img src="storage/food/cow-black.png" height="30" width="30" alt="wine_image" />
-              </div>
-              </OverlayTrigger>                    <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="px-3 mb-0 shadow-xxs bg-white text-center border border-radius-md d-flex align-items-center justify-content-center flex-grow-1">
-                <img src="storage/food/cow-black.png" height="30" width="30" alt="wine_image" />
-              </div>
-              </OverlayTrigger>                    <OverlayTrigger placement="top" overlay={<Tooltip>Wołowina</Tooltip>}>
-              <div class="px-3 mb-0 shadow-xxs bg-white text-center border border-radius-md d-flex align-items-center justify-content-center flex-grow-1">
-                <img src="storage/food/cow-black.png" height="30" width="30" alt="wine_image" />
-              </div>
-              </OverlayTrigger>
-
-                    <label class="btn btn-white px-3 mb-0 ps-2">
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-caret-down-fill" viewBox="0 0 16 16">
-  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-</svg>
-              </label>
-</div>
-</div> */}
                 <div className="d-flex flex-column mb-3" >
                 <label>Opis wina (opcjonalnie)</label>
-                <textarea class="form-control" id="message-text" rows="12" placeholder="Nie dodano żadnego opisu" value={data.description} onChange={handleWineDescription}></textarea>
+                <textarea className="form-control" id="message-text" rows="12" placeholder="Nie dodano żadnego opisu" value={data.description || ""} onChange={handleWineDescription}></textarea>
                 </div>
                 <InputError message={errors.description} className="mt-2" />
 
             </div>
-            <div class="row d-flex me-auto ">
-                <div class="text-center d-flex flex-wrap">
-                <button type="button" class="btn btn-sm btn-dark btn-icon d-flex mb-2 ms-sm-n1" onClick={submit}>
-                          <span class="btn-inner--icon">
-                            <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
+            <div className="row d-flex me-auto ">
+                <div className="text-center d-flex flex-wrap">
+                {Boolean(!processing) ? <button type="button" className="btn btn-sm btn-dark btn-icon d-flex mb-2 ms-sm-n1" onClick={submit}>
+                          <span className="btn-inner--icon">
+                            <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="d-block me-2">
                               <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                             </svg>
                           </span>
-                          <span class="btn-inner--text text-nowrap" data-bs-toggle="modal" data-bs-target="#commentModal" data-toggle="commentModal" data-target="commentModal">Dodaj wino</span>
-                        </button>
-                        <Link className="border-0 bg-transparent" href={(route('dashboard'))} method="get" as="button">
-                        <button type="button" class="btn btn-sm btn-dark btn-icon d-flex mb-2 ms-3">
-                          <span class="btn-inner--icon">
+                          <span className="btn-inner--text text-nowrap">Dodaj wino</span>
+                        </button> : <button type="button" className="btn btn-sm btn-dark btn-icon d-flex mb-2 ms-sm-n1">Wysyłanie...</button>}
+                        <Link className="border-0 bg-transparent" href={(route('dashboard'))} method="get">
+                        <button type="button" className="btn btn-sm btn-dark btn-icon d-flex mb-2 ms-3">
+                          <span className="btn-inner--icon">
                           </span>
 
               
                           
-                          <span class="btn-inner--text text-nowrap" data-bs-toggle="modal" data-bs-target="#commentModal" data-toggle="commentModal" data-target="commentModal">Anuluj</span>
+                          <span className="btn-inner--text text-nowrap">Anuluj</span>
                         </button>
                         </Link>
                 </div>
@@ -495,8 +437,8 @@ console.log(errors);
     
   <div className="container-fluid py-4 px-3">
 
-<Footer />  
 </div>
+<Footer  />  
 </main>  
     {/* </GuestLayout> */}
     </>

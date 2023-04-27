@@ -5,7 +5,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Select, { components } from 'react-select';
 import { Link, useForm, usePage } from '@inertiajs/inertia-react';
 
-export default function Filter({wines, paramsFilter, props}) {
+export default function Filter({wines, totalWines, paramsFilter, props}) {
  
 
   // const [wineColor, setWineColor] = useState(null);
@@ -30,12 +30,13 @@ export default function Filter({wines, paramsFilter, props}) {
     winePrize: {
       min: Boolean(paramsFilter.winePrize) ? paramsFilter.winePrize.min : "",
       max: Boolean(paramsFilter.winePrize) ? paramsFilter.winePrize.max : "",
-    }
+    },
+    selectedList: Boolean(paramsFilter.selectedList) ? paramsFilter.selectedList : "Ostatnio dodane"
   });
 
-  const [selectedList, setSelectedList] = useState("Ostatnio dodane");
+  // const [selectedList, setSelectedList] = useState("Ostatnio dodane");
 
-  const { wineColor, wineTaste, wineType, wineCountries, wineVol, winePrize, alcoholFree } = data;
+  const { wineColor, wineTaste, wineType, wineCountries, wineVol, winePrize, alcoholFree, selectedList } = data;
 
 
   const [changeFilter, handleChangeFilter] = useState(false);
@@ -71,9 +72,19 @@ export default function Filter({wines, paramsFilter, props}) {
 
   useEffect(() => {
     if (changeFilter) {
-        return get('/filter', { params: data, preserveScroll: true });
+        handleChangeFilter(false)
+        return get('/filter', { params: data, preserveState:true, preserveScroll: true });
     }
   });
+
+  const handleSelectedList = (e) => {
+    const { textContent } = e.target;
+      setData({
+        ...data,
+        selectedList: textContent
+      });
+      handleChangeFilter(true);
+  }
 
   const handleWineColor = (e) => {
     const { value, checked } = e.target;
@@ -270,7 +281,7 @@ export default function Filter({wines, paramsFilter, props}) {
   const DropdownIndicator = props => {
     return (
       <components.DropdownIndicator {...props}>
-  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="#4d4d4d" class="ms-2 bi bi-caret-down-fill me-1" viewBox="0 0 16 16">
+  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="#4d4d4d" className="ms-2 bi bi-caret-down-fill me-1" viewBox="0 0 16 16">
   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 </svg>
       </components.DropdownIndicator>
@@ -282,24 +293,24 @@ export default function Filter({wines, paramsFilter, props}) {
         <div className="col-12 mt-n4">
         <div className="card shadow-xs border mb-1 pb-3">
           <div className="card-header pb-0 p-3">
-          <div class="row">
-                  <div class="col-md-8 col-9">
-                    <h6 class="mb-0 font-weight-semibold text-lg">Filter win</h6>
+          <div className="row">
+                  <div className="col-md-8 col-9">
+                    <h6 className="mb-0 font-weight-semibold text-lg">Filter win</h6>
                   </div>
-                  <div class="col-md-4 col-3 text-end">
-                  <div class="dropdown">
+                  <div className="col-md-4 col-3 text-end">
+                  <div className="dropdown">
                   <div className='d-flex justify-content-end align-items-end align-items-sm-center mt-1 mt-sm-0 flex-column flex-sm-row'><p className='text-sm me-2 mb-1 mb-sm-3'>Sortowanie:</p>
-                  <button type="button" class="btn btn-white btn-icon px-2 py-2 ps-3 pe-3 text-nowrap" data-bs-toggle="dropdown" aria-expanded="false">
-                  {selectedList} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 bi bi-caret-down-fill" viewBox="0 0 16 16">
+                  <button type="button" className="btn btn-white btn-icon px-2 py-2 ps-3 pe-3 text-nowrap" data-bs-toggle="dropdown" aria-expanded="false">
+                  {data.selectedList} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="ms-2 bi bi-caret-down-fill" viewBox="0 0 16 16">
   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 </svg>
                     </button>
                  
                   
-<ul class="dropdown-menu dropdown-menu-end">
-    <li><a onClick={(e) => setSelectedList(e.target.textContent)} class="dropdown-item">Ostatnio dodane</a></li>
-    <li><a onClick={(e) => setSelectedList(e.target.textContent)} class="dropdown-item">Najwyżej oceniane</a></li>
-    <li><a onClick={(e) => setSelectedList(e.target.textContent)} class="dropdown-item">Najtańsze cenowo</a></li>
+<ul className="dropdown-menu dropdown-menu-end">
+    <li><a onClick={(e) => handleSelectedList(e)} className="dropdown-item">Ostatnio dodane</a></li>
+    <li><a onClick={(e) => handleSelectedList(e)} className="dropdown-item">Najwyżej oceniane</a></li>
+    <li><a onClick={(e) => handleSelectedList(e)} className="dropdown-item">Najtańsze cenowo</a></li>
   </ul>
 
                   </div>   
@@ -310,43 +321,43 @@ export default function Filter({wines, paramsFilter, props}) {
 
 
           <div className="card-body p-3 ms-4">
-  <div class="row justify-content-between">
+  <div className="row justify-content-between">
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 d-flex flex-grow-1 flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 d-flex flex-grow-1 flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
-        <li class={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineColor.length>0) ? 'border-info' : null}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column">
-                <h6 class={`mb-0 text-sm ${Boolean(wineColor.length>0) ? 'text-info' : null}`}>Kolor wina</h6>
-                <span class="text-sm text-info">
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Czerwone" id="flexCheckDefault" onChange={handleWineColor} checked={wineColor.find(color => color === "Czerwone")} />
-                    <span class="font-weight-semibold text-dark ms-1">Czerwone</span>
+        <li className={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineColor.length>0) ? 'border-info' : null}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column">
+                <h6 className={`mb-0 text-sm ${Boolean(wineColor.length>0) ? 'text-info' : null}`}>Kolor wina</h6>
+                <span className="text-sm text-info">
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Czerwone" id="flexCheckDefault" onChange={handleWineColor} checked={Boolean(wineColor.find(color => color === "Czerwone")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Czerwone</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Różowe" id="flexCheckDefault" onChange={handleWineColor} checked={wineColor.find(color => color === "Różowe")} />
-                    <span class="font-weight-semibold text-dark ms-1">Różowe</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Różowe" id="flexCheckDefault" onChange={handleWineColor} checked={Boolean(wineColor.find(color => color === "Różowe")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Różowe</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Białe" id="flexCheckDefault" onChange={handleWineColor} checked={wineColor.find(color => color === "Białe")} />
-                    <span class="font-weight-semibold text-dark ms-1">Białe</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Białe" id="flexCheckDefault" onChange={handleWineColor} checked={Boolean(wineColor.find(color => color === "Białe")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Białe</span>
                   </div>
                 </span>
               </div>
             </div>
 
-            <div class="text-end">
-                <div class="dropdown">
+            <div className="text-end">
+
                 <button type="button" className="btn btn-white btn-icon px-2 py-2" onClick={resetWineColor}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                   </svg>
                 </button>   
 
-          </div>
+  
         </div>
       </li>
         </ul>
@@ -361,46 +372,44 @@ export default function Filter({wines, paramsFilter, props}) {
 
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
-        <li class={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineTaste.length>0) ? 'border-info' : null}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column">
-                <h6 class={`mb-0 text-sm ${Boolean(wineTaste.length>0) ? 'text-info' : null}`}>Smak wina</h6>
+        <li className={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineTaste.length>0) ? 'border-info' : null}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column">
+                <h6 className={`mb-0 text-sm ${Boolean(wineTaste.length>0) ? 'text-info' : null}`}>Smak wina</h6>
                 
-                <span class="text-sm text-info">
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Wytrawne" id="flexCheckDefault" onChange={handleWineTaste} checked={wineTaste.find(taste => taste === "Wytrawne")} />
-                    <span class="font-weight-semibold text-dark ms-1">Wytrawne</span>
+                <span className="text-sm text-info">
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Wytrawne" id="flexCheckDefault" onChange={handleWineTaste} checked={Boolean(wineTaste.find(taste => taste === "Wytrawne")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Wytrawne</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Półwytrawne" id="flexCheckDefault" onChange={handleWineTaste} checked={wineTaste.find(taste => taste === "Półwytrawne")} />
-                    <span class="font-weight-semibold text-dark ms-1">Półwytrawne</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Półwytrawne" id="flexCheckDefault" onChange={handleWineTaste} checked={Boolean(wineTaste.find(taste => taste === "Półwytrawne")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Półwytrawne</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Półsłodkie" id="flexCheckDefault" onChange={handleWineTaste} checked={wineTaste.find(taste => taste === "Półsłodkie")} />
-                    <span class="font-weight-semibold text-dark ms-1">Półsłodkie</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Półsłodkie" id="flexCheckDefault" onChange={handleWineTaste} checked={Boolean(wineTaste.find(taste => taste === "Półsłodkie")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Półsłodkie</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Słodkie" id="flexCheckDefault" onChange={handleWineTaste} checked={wineTaste.find(taste => taste === "Słodkie")} />
-                    <span class="font-weight-semibold text-dark ms-1">Słodkie</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Słodkie" id="flexCheckDefault" onChange={handleWineTaste} checked={Boolean(wineTaste.find(taste => taste === "Słodkie")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Słodkie</span>
                   </div>
                 </span>
 
               </div>
             </div>
 
-            <div class="text-end">
-                <div class="dropdown">
-                <button type="button" className="btn btn-white btn-icon px-2 py-2 " data-bs-toggle="dropdown" aria-expanded="false" onClick={resetWineTaste}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <div className="text-end">
+
+                <button type="button" className="btn btn-white btn-icon px-2 py-2" onClick={resetWineTaste}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                   </svg>
                 </button>   
-
-          </div>
 
         </div>
 
@@ -411,46 +420,43 @@ export default function Filter({wines, paramsFilter, props}) {
 
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
-        <li class={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineType.length>0) ? 'border-info' : null}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column">
-                <h6 class={`mb-0 text-sm ${Boolean(wineType.length>0) ? 'text-info' : null}`}>Rodzaj wina</h6>
+        <li className={`list-group-item d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineType.length>0) ? 'border-info' : null}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column">
+                <h6 className={`mb-0 text-sm ${Boolean(wineType.length>0) ? 'text-info' : null}`}>Rodzaj wina</h6>
                 
-                <span class="text-sm text-info">
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Spokojne" id="flexCheckDefault" onChange={handleWineType} checked={wineType.find(type => type === "Spokojne")} />
-                    <span class="font-weight-semibold text-dark ms-1">Spokojne</span>
+                <span className="text-sm text-info">
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Spokojne" id="flexCheckDefault" onChange={handleWineType} checked={Boolean(wineType.find(type => type === "Spokojne")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Spokojne</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Musujące" id="flexCheckDefault" onChange={handleWineType} checked={wineType.find(type => type === "Musujące")} />
-                    <span class="font-weight-semibold text-dark ms-1">Musujące</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Musujące" id="flexCheckDefault" onChange={handleWineType} checked={Boolean(wineType.find(type => type === "Musujące")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Musujące</span>
                   </div>
-                  <div class="form-check mt-2 mb-0">
-                    <input class="form-check-input" type="checkbox" value="Grzane" id="flexCheckDefault" onChange={handleWineType} checked={wineType.find(type => type === "Grzane")} />
-                    <span class="font-weight-semibold text-dark ms-1">Grzane</span>
+                  <div className="form-check mt-2 mb-0">
+                    <input className="form-check-input" type="checkbox" value="Grzane" id="flexCheckDefault" onChange={handleWineType} checked={Boolean(wineType.find(type => type === "Grzane")) ? true : false} />
+                    <span className="font-weight-semibold text-dark ms-1">Grzane</span>
                   </div>
                 </span>
 
               </div>
             </div>
-            <div class="d-flex align-items-center text-danger text-gradient">
-              <div class="form-check">
+            <div className="d-flex align-items-center text-danger text-gradient">
+              <div className="form-check">
               </div>
             </div>
-            <div class="text-end">
-                <div class="dropdown">
-                <button type="button" className="btn btn-white btn-icon px-2 py-2 " data-bs-toggle="dropdown" aria-expanded="false" onClick={resetWineType}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <div className="text-end">
+
+                <button type="button" className="btn btn-white btn-icon px-2 py-2" aria-expanded="false" onClick={resetWineType}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                   </svg>
                 </button>   
-
-          </div>
-
         </div>
       </li>
         </ul>
@@ -458,20 +464,20 @@ export default function Filter({wines, paramsFilter, props}) {
 
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
 
-        <li class={`list-group-item d-flex mb-3 border-radius-md shadow-xs p-3 flex-column ${Boolean(wineCountries.length>0) ? 'border-info' : null}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column mb-1">
-                <h6 class={`mb-3 text-sm ${Boolean(wineCountries.length>0) ? 'text-info' : null}`}>Kraj pochodzenia</h6>
+        <li className={`list-group-item d-flex mb-3 border-radius-md shadow-xs p-3 flex-column ${Boolean(wineCountries.length>0) ? 'border-info' : null}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column mb-1">
+                <h6 className={`mb-3 text-sm ${Boolean(wineCountries.length>0) ? 'text-info' : null}`}>Kraj pochodzenia</h6>
 
 
               </div>
             </div>
-        <div>
+        <div className="flag-selector">
         <Select
                         components={{ DropdownIndicator }}
                         isMulti="true"
@@ -515,14 +521,14 @@ export default function Filter({wines, paramsFilter, props}) {
 
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
-        <li class={`list-group-item border d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineVol.max == 50 && wineVol.min == 0) ? null : 'border-info'}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column mb-3">
-                <h6 class={`mb-3 text-sm ${Boolean(wineVol.max == 50 && wineVol.min == 0) ? null : 'text-info'}`}>Zawartość alkoholu</h6>
+        <li className={`list-group-item border d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(wineVol.max == 50 && wineVol.min == 0) ? null : 'border-info'}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column mb-3">
+                <h6 className={`mb-3 text-sm ${Boolean(wineVol.max == 50 && wineVol.min == 0) ? null : 'text-info'}`}>Zawartość alkoholu</h6>
                   {Boolean(data.alcoholFree) ?
                   <div className="container d-flex">
                   <div className="slider" >
@@ -536,62 +542,58 @@ export default function Filter({wines, paramsFilter, props}) {
                 <div className="form-check form-switch ps-0 mt-4">
 
                   <input className="form-check-input ms-2" type="checkbox" id="flexSwitchCheckDefault3" onChange={handleAlcoholFree} checked={Boolean(alcoholFree) ? 1 : 0} />
-                  <label className="font-weight-semibold text-dark ms-2" for="flexSwitchCheckDefault3">Bezalkoholowe</label>
+                  <label className="font-weight-semibold text-dark ms-2" htmlFor="flexSwitchCheckDefault3">Bezalkoholowe</label>
                 </div>
               </div>
             </div>
 
-            <div class="text-end">
-                <div class="dropdown">
+            <div className="text-end">
+
                 <button type="button" className="btn btn-white btn-icon px-2 py-2 " onClick={resetWineVol}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                   </svg>
                 </button>   
-
-          </div>
-
         </div>
       </li>
         </ul>
       </div>
 
 
-      <div class="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
-        <ul class="list-group d-flex row flex-row col-12">
+      <div className="col-xxl-2 col-md-4 col-sm-6 flex-grow-1 d-flex flex-col">
+        <ul className="list-group d-flex row flex-row col-12">
 
 
-        <li class={`list-group-item border flex-row d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(winePrize.max || winePrize.min) ? 'border-info' : null}`}>
-            <div class="d-flex align-items-start">
-              <div class="d-flex flex-column">
-                <h6 class={`mb-3 text-sm ${Boolean(winePrize.max || winePrize.min) ? 'text-info' : null}`}>Cena hurtowa</h6>
+        <li className={`list-group-item border flex-row d-flex justify-content-between mb-3 border-radius-md shadow-xs p-3 ${Boolean(winePrize.max || winePrize.min) ? 'border-info' : null}`}>
+            <div className="d-flex align-items-start">
+              <div className="d-flex flex-column">
+                <h6 className={`mb-3 text-sm ${Boolean(winePrize.max || winePrize.min) ? 'text-info' : null}`}>Cena hurtowa</h6>
                 
-                <span class="text-sm text-info">
+                <span className="text-sm text-info">
                 <div className="input-group mb-3">
-                <span class="input-group-text">Od</span>
-            <input type="number" min="0" class="form-control" placeholder="0 zł" aria-label="From" value={winePrize.min} onChange={handleWinePrize} onBlur={onBlur} id="min" />
+                <span className="input-group-text">Od</span>
+            <input type="number" min="0" className="form-control" placeholder="0 zł" aria-label="From" value={Boolean(winePrize.min) ? winePrize.min : ""} onChange={handleWinePrize} onBlur={onBlur} id="min" />
             </div><div className="input-group">
-            <span class="input-group-text">Do</span>
-            <input type="number" class="form-control" placeholder="100 zł" aria-label="To" value={winePrize.max} onChange={handleWinePrize} onBlur={onBlur} id="max" />
+            <span className="input-group-text">Do</span>
+            <input type="number" className="form-control" placeholder="100 zł" aria-label="To" value={Boolean(winePrize.max) ? winePrize.max : ""} onChange={handleWinePrize} onBlur={onBlur} id="max" />
 
           </div>
                 </span>
 
               </div>
             </div>
-            <div class="d-flex align-items-center text-danger text-gradient">
-              <div class="form-check">
+            <div className="d-flex align-items-center text-danger text-gradient">
+              <div className="form-check">
 
               </div>
             </div>
-            <div class="text-end">
-                <div class="dropdown">
+            <div className="text-end">
+    
                 <button type="button" className="btn btn-white btn-icon px-2 py-2 " onClick={resetWinePrize}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                   </svg>
                 </button>   
-          </div>
 
         </div>
       </li>
@@ -614,20 +616,20 @@ export default function Filter({wines, paramsFilter, props}) {
     </div>
 
 
-    <div class="col-12">
-        <div class="d-lg-flex align-items-center mt-4 mb-4">
-          <div class="flex-grow mb-md-0 mb-4">
-            <h5 class="font-weight-semibold mb-1 ms-4">Znalezionych win: {wines.length}</h5>
-            <p class="text-sm mb-0 ms-4">Jeżeli brakuje wina, które zasługuje na znalezienie się w naszej bazie prosimy o je dodanie {props ? "za pomocą formularza." : "po uprzednim zalogowaniu się na konto."}</p>
+    <div className="col-12">
+        <div className="d-lg-flex align-items-center mt-4 mb-4">
+          <div className="flex-grow mb-md-0 mb-4">
+            <h5 className="font-weight-semibold mb-1 ms-4">Znalezionych win: {totalWines}</h5>
+            <p className="text-sm mb-0 ms-4">Jeżeli brakuje wina, które zasługuje na znalezienie się w naszej bazie prosimy o je dodanie {props ? "za pomocą formularza." : "po uprzednim zalogowaniu się na konto."}</p>
           </div>
             {props ? 
               <Link type="button" className='btn btn-sm btn-dark btn-icon d-flex align-items-end mb-0 me-4 mt-2 ms-4 ms-sm-auto' href={`/addwine`} method="get" as="button">
-                <span class="btn-inner--icon">
-                  <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
+                <span className="btn-inner--icon">
+                  <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="d-block me-2">
                     <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                   </svg>
                 </span>
-                <span class="btn-inner--text">Dodaj wino</span>
+                <span className="btn-inner--text">Dodaj wino</span>
               </Link>
             : null}
         </div>

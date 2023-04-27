@@ -23,13 +23,6 @@ const Index = ({auth, posts, prevPhrase, prevCategory, ses}) => {
         post(route('posts.store'), {onSuccess: () => reset() });
     }
 
-    // const search = (e) => {
-    //     e.preventDefault();
-    //     console.log(phrase, category);
-    //     route('posts.destroy', post.id)
-    //     console.log(lol)
-    // }
-
     return (
         <AuthenticatedLayout auth={auth}>
             <Head title='Posts' />

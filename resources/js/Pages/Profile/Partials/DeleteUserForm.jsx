@@ -7,7 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/inertia-react';
 
-export default function DeleteUserForm({ className }) {
+export default function DeleteUserForm({ className, handleClose }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -37,63 +37,40 @@ export default function DeleteUserForm({ className }) {
         });
     };
 
-    const closeModal = () => {
-        setConfirmingUserDeletion(false);
-
-        reset();
+    const onHandleChange = (event) => {
+        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
 
-    return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">Delete Account</h2>
+    const setClose = () => {
+        handleClose();
+    }
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Before
-                    deleting your account, please download any data or information that you wish to retain.
+    return (
+        <div className='d-flex flex-column col-12'>
+            <header className='col-12 d-flex flex-column'>
+                <p className="mt-2 text-sm text-gray-600 ms-auto me-auto ">
+                Tutaj możesz usunąć swoje konto z serwisu, pamiętaj jednak że ten proces jest nieodwracalny.</p>
+                <p className="mt-n2 text-sm text-gray-600 ms-auto me-auto ">
+                Aby uwierzytelnić chęć trwałego wykasowania swojego konta wraz ze wszystkimi jego zasobami należy wprowadzić hasło
+                i zatwierdzić rozstanie.
                 </p>
             </header>
-
-            <DangerButton onClick={confirmUserDeletion}>Delete Account</DangerButton>
-
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Are you sure you want to delete your account?
-                    </h2>
-
-                    <p className="mt-1 text-sm text-gray-600">
-                        Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                        enter your password to confirm you would like to permanently delete your account.
-                    </p>
-
-                    <div className="mt-6">
-                        <InputLabel for="password" value="Password" className="sr-only" />
-
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            handleChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-3/4"
-                            isFocused
-                            placeholder="Password"
-                        />
-
-                        <InputError message={errors.password} className="mt-2" />
+            <div className="col-12 d-flex flex-column flex-lg-row ps-2 pe-2">
+            <div className="col-12 col-lg-6 d-sm-inline pe-md-2">
+                    <label>Hasło</label>
+                    <div className="mb-3">
+                      <input type="password" className="form-control" placeholder="Wprowadź hasło" 
+                      value={data.current_password} id="password" name="password" onChange={onHandleChange} required/>
                     </div>
-
-                    <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-
-                        <DangerButton className="ml-3" processing={processing}>
-                            Delete Account
-                        </DangerButton>
+                    <InputError message={errors.password} className="mt-2 mb-2" />
+            </div>
+            </div>
+            <div className="col-12 col-lg-6 d-sm-inline pe-md-2">
+           <div className="text-center d-flex gap-2 mb-n3 ">
+                        <button disabled={processing} type="button" onClick={deleteUser} className="btn btn-dark w-100 mt-2">Zapisz zmiany</button>
+                        <button disabled={processing} type="button" onClick={setClose} className="btn btn-dark w-100 mt-2 ">Anuluj</button>
                     </div>
-                </form>
-            </Modal>
-        </section>
+            </div>
+        </div>
     );
 }

@@ -9,7 +9,6 @@ import { useForm, Head } from '@inertiajs/inertia-react'
 import Post from '@/Components/Post'
 
 const Show = ({auth, post}) => {
-    console.log(post);
 
     return (
         <AuthenticatedLayout auth={auth}>

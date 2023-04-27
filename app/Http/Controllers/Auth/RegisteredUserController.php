@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use App\Rules\Recaptcha;
 
 class RegisteredUserController extends Controller
 {
@@ -44,6 +45,7 @@ class RegisteredUserController extends Controller
             'rules' => 'required|boolean|accepted',
             'birthday' => ['required', 'date', new AdultBirthday()],
             'locality' => 'required|string|max:50|min:3',
+            'token' => ['required', new Recaptcha]
         ],
         [
             'required' => 'Te pole jest obowiązkowe.',
@@ -72,6 +74,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/')->with('message', "Dziękujemy za założenie konta i witamy na stronie.");
     }
 }

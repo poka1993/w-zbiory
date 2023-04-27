@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('image');
             $table->string('country');
-            $table->string('vol');
-            $table->string('prize');
+            $table->float('vol');
+            $table->float('prize');
             $table->json('dishes')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('author_id');

@@ -32,8 +32,8 @@ export default function ForgotPassword({ status }) {
 
 
             <label>Adres email</label>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Wprowadź swój email"
+                    <div className="mb-3">
+                        <input type="email" className="form-control" placeholder="Wprowadź swój email"
                         id="password" name="email" value={data.email} isFocused={true} onChange={onHandleChange} />
                     </div>
 
@@ -41,8 +41,8 @@ export default function ForgotPassword({ status }) {
                 <InputError message={errors.email} className="mt-2" />
 
                 <div className="flex items-center justify-end mt-n3">
-                <div class="text-center">
-                            <button disabled={processing} type="button" onClick={submit} class="btn btn-dark w-100 mt-4 mb-0">Prześlij link do zresetowania hasła</button>
+                <div className="text-center">
+                            <button disabled={processing} type="button" onClick={submit} className="btn btn-dark w-100 mt-4 mb-0">Prześlij link do zresetowania hasła</button>
                     </div>
                 </div>
             </form>

@@ -20,6 +20,11 @@ class PasswordController extends Controller
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
+        ], [
+            'required' => 'Te pole jest obowiązkowe.',
+            'current_password' => 'Wprowadzone hasło jest nie prawidłowe.',
+            'password.min' => 'Hasło musi zawierać minimalnie :min znaków.',
+            'confirmed' => 'Wprowadzone hasła są różne.'
         ]);
 
         $request->user()->update([

@@ -12,18 +12,16 @@ dayjs.extend(relativeTime);
 const Post = ({post}) => {
 
     const {auth} = usePage().props;
-    // console.log(auth)
+
     const [editing, setEditing] = useState(false);
     const {data, setData, patch, processing, reset, errors} = useForm({
         title: post.title,
         body: post.body
     })
 
-    // console.log(post)
-
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
+
         patch(route('posts.update', post.id), {onSuccess: () => setEditing(false) });
     }
 
